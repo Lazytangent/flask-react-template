@@ -2,6 +2,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Make sure to install dependencies in here with `npm install`.
 
+For local development, you'll need to also make a copy of the `.env.example` as `.env` to set your environment.
+
+```bash
+cp .env.example .env
+```
+
 Your React App will live here.  While is development, run this application from this location using `npm start`.
 
 No environment variables are needed to run this application in development, but be sure to set the `REACT_APP_BASE_URL` environment variable in the Dockerfile in the root of this repository! It needs to match the url at which Heroku will host your site.

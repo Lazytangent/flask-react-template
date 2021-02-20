@@ -12,13 +12,26 @@ This is the backend for the Flask React project.
 
 2. Install dependencies
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+  ```bash
+  pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
+  ```
 
 3. Create a **.env** file based on the example with proper settings for your
    development environment
+
+   ```bash
+   cp .env.example .env
+   ```
 4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+
+    ```bash
+    psql
+    ```
+
+    ```sql
+    CREATE USER starter_app_dev WITH PASSWORD 'password';
+    CREATE DATABASE starter_app WITH OWNER starter_app_dev;
+    ```
 
 5. Get into your pipenv, migrate your database, seed your database, and run your flask app
 
@@ -71,26 +84,32 @@ This is the backend for the Flask React project.
    heroku container:login
    ```
 
+6. Connect your local app to the Heroku app (this will make the commands a little shorter later)
+
+    ```bash
+    heroku git:remote -a {NAME_OF_HEROKU_APP}
+    ```
+
 6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
    This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
 7. Push your docker container to heroku from the root directory of your project.
    This will build the dockerfile and push the image to your heroku container registry
 
    ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
+   heroku container:push web
    ```
 
 8. Release your docker container to heroku
 
    ```bash
-   heroku container:release web -a {NAME_OF_HEROKU_APP}
+   heroku container:release web
    ```
 
 9. set up your database:
 
    ```bash
-   heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-   heroku run -a {NAME_OF_HEROKU_APP} flask seed all
+   heroku run flask db upgrade
+   heroku run flask seed all
    ```
 
 10. Under Settings find "Config Vars" and add any additional/secret .env variables.
