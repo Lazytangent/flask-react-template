@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
 import { NavLink } from "react-router-dom";
 
+import { getUsers } from '../store/users';
+
 const UsersList = () => {
+  const dispatch = useDispatch();
+
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/api/users/");
-      const responseData = await response.json();
-      setUsers(responseData.users);
+  useEffect(async () => {
+    const data = await dispatch(getUsers());
+    if (!data.errors) {
+      setUsers(data.users);
     }
-    fetchData();
-  }, []);
+  }, [dispatch]);
 
   const userComponents = users.map((user) => {
     return (
