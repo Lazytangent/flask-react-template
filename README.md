@@ -1,6 +1,6 @@
 # Flask React Project
 
-This is the backend for the Flask React project.
+This is the starter for a Flask React project.
 
 ## Getting started
 
