@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-function UsersList() {
+const UsersList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -27,6 +27,6 @@ function UsersList() {
       <ul>{userComponents}</ul>
     </>
   );
-}
+};
 
 export default UsersList;
