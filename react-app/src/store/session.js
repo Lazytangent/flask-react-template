@@ -8,7 +8,7 @@ const setSession = (user) => {
   };
 };
 
-const removeSession = (user) => {
+const removeSession = () => {
   return {
     type: REMOVE_SESSION,
   };
