@@ -18,14 +18,16 @@ export const getUsers = () => async (dispatch) => {
   return data;
 };
 
-const initialState = {
-  users: [],
-};
+const initialState = {};
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USERS:
-      return { ...state, users: action.users };
+      const users = {};
+      action.users.forEach(user => {
+        users[user.id] = user;
+      });
+      return users;
     case REMOVE_SESSION:
       return { ...state, users: [] };
     default:

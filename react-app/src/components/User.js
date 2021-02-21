@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
 const User = () => {
   const [user, setUser] = useState({});
-  // Notice we use useParams here instead of getting the params
-  // From props.
+  const users = useSelector(state => state.users);
   const { userId }  = useParams();
 
   useEffect(() => {
     if (!userId) {
       return
     }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
-    })();
+    if (users) {
+      setUser(users[userId]);
+    }
   }, [userId]);
 
   if (!user) {
