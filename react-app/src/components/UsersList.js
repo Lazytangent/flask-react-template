@@ -9,11 +9,13 @@ const UsersList = () => {
 
   const [users, setUsers] = useState([]);
 
-  useEffect(async () => {
-    const data = await dispatch(getUsers());
-    if (!data.errors) {
-      setUsers(data.users);
-    }
+  useEffect(() => {
+    (async () => {
+      const data = await dispatch(getUsers());
+      if (!data.errors) {
+        setUsers(data.users);
+      }
+    })();
   }, [dispatch]);
 
   const userComponents = users.map((user) => {
