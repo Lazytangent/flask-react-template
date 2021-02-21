@@ -13,7 +13,7 @@ export const getUsers = () => async (dispatch) => {
   const response = await fetch('/api/users');
   const data = await response.json();
   if (!data.errors) {
-    dispatch(setUsers(users));
+    dispatch(setUsers(data.users));
   }
   return data;
 };
