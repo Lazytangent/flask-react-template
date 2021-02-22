@@ -90,28 +90,28 @@ This is the starter for a Flask React project.
     heroku git:remote -a {NAME_OF_HEROKU_APP}
     ```
 
-6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
+7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
    This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-7. Push your docker container to heroku from the root directory of your project.
+8. Push your docker container to heroku from the root directory of your project.
    This will build the dockerfile and push the image to your heroku container registry
 
    ```bash
    heroku container:push web
    ```
 
-8. Release your docker container to heroku
+9. Release your docker container to heroku
 
    ```bash
    heroku container:release web
    ```
 
-9. set up your database:
+10. set up your database:
 
    ```bash
    heroku run flask db upgrade
    heroku run flask seed all
    ```
 
-10. Under Settings find "Config Vars" and add any additional/secret .env variables.
+11. Under Settings find "Config Vars" and add any additional/secret .env variables.
 
-11. profit
+12. profit
