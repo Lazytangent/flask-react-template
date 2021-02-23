@@ -29,7 +29,7 @@ const usersReducer = (state = initialState, action) => {
       });
       return users;
     case REMOVE_SESSION:
-      return { ...state, users: [] };
+      return { ...state, users: {} };
     default:
       return state;
   }
