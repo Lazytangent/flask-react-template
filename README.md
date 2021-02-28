@@ -87,7 +87,7 @@ This is the starter for a Flask React project.
 6. Connect your local app to the Heroku app (this will make the commands a little shorter later)
 
     ```bash
-    heroku git:remote -a {NAME_OF_HEROKU_APP}
+    heroku config:set -a {NAME_OF_HEROKU_APP}
     ```
 
 7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
