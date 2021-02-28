@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-function App() {
+import { authenticate } from './store/session';
+import NavBar from './components/NavBar';
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginForm from './components/LoginForm';
+import SignUpForm from './components/SignUpForm';
+
+const App = () => {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const user = await authenticate();
+      if (!user.errors) {
+        setAuthenticated(true);
+      }
+      setLoaded(true);
+    })();
+  }, []);
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar setAuthenticated={setAuthenticated} />
+      <Switch>
+        <Route path="/login" exact={true}>
+          <LoginForm
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
+        </Route>
+        <Route path="/sign-up" exact={true}>
+          <SignUpForm
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
+        </Route>
+        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+          <h1>My Home Page</h1>
+        </ProtectedRoute>
+      </Switch>
+    </>
   );
-}
+};
 
 export default App;
